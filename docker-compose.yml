@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+    db:
+        image: mysql:8.0.31
+        container_name: MySQL_DB
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+          MYSQL_DATABASE: 'MySQL_DB'
+      # So you don't have to use root, but you can if you like
+          MYSQL_USER: 'MYSQL_ROOT_PASSWORD'
+      # You can use whatever password you like
+          MYSQL_PASSWORD: 'password'
+      # Password for root access
+          MYSQL_ROOT_PASSWORD: 'password'
+        ports:
+      # <Port exposed> : < MySQL Port running inside container>
+          - '5080:3306'
+      # Where our data will be persisted
+        volumes:
+          - my-db:/var/lib/mysql
+volumes:
+    my-db:
